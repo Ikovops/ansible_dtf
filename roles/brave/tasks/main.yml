@@ -1,0 +1,6 @@
+---
+- name: Install brave
+  kewlfft.aur.aur:
+    name: brave-bin
+    state: latest
+    use: paru
