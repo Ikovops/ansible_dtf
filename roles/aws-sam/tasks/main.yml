@@ -1,0 +1,39 @@
+---
+- name: Detecting previous installation
+  ansible.builtin.stat:
+    path: /usr/local/aws-sam-cli
+  register: previous
+
+- name: Download aws-sam
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads"
+    cmd: wget "https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip"
+
+- name: Unzip
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads"
+    cmd: unzip aws-sam-cli-linux-x86_64.zip -d aws-sam
+
+- name: Install
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads/aws-sam"
+    cmd: ./install
+  become: true
+  when: not previous.stat.exists
+
+- name: Update
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads/aws-sam"
+    cmd: ./install --update
+  become: true
+  when: previous.stat.exists
+
+- name: Delete archive
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Downloads/aws-sam-cli-linux-x86_64.zip"
+    state: absent
+
+- name: Delete unzipped folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Downloads/aws-sam"
+    state: absent

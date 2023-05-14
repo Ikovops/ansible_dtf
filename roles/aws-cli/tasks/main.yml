@@ -1,0 +1,44 @@
+---
+- name: Detecting previous installation
+  ansible.builtin.stat:
+    path: /usr/local/aws-cli/v2
+  register: previous
+
+- name: Download aws-cli v2
+  ansible.builtin.shell:
+    cmd: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "{{ ansible_user_dir }}/Downloads/awscliv2.zip"
+
+- name: Unzip
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads"
+    cmd: unzip awscliv2.zip
+
+- name: Install
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads/aws"
+    cmd: ./install
+  become: true
+  when: not previous.stat.exists
+
+- name: Update
+  ansible.builtin.shell:
+    chdir: "{{ ansible_user_dir }}/Downloads/aws"
+    cmd: ./install --update
+  become: true
+  when: previous.stat.exists
+
+- name: Delete archive
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Downloads/awscliv2.zip"
+    state: absent
+
+- name: Delete unzipped folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/Downloads/aws"
+    state: absent
+
+- name: Copy credentials
+  ansible.builtin.template:
+    src: "credentials.j2"
+    dest: "{{ ansible_user_dir }}/.aws/credentials"
+  when: aws is defined
