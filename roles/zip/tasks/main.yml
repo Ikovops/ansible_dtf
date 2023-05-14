@@ -1,0 +1,14 @@
+---
+- name: Install zip
+  ansible.builtin.package:
+    name: zip
+    state: latest
+    use: pacman
+  become: true
+
+- name: Install unzip
+  ansible.builtin.package:
+    name: unzip
+    state: latest
+    use: pacman
+  become: true
