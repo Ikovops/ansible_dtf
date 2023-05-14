@@ -1,0 +1,14 @@
+---
+- name: Install engine
+  ansible.builtin.package:
+    name: docker
+    state: latest
+    use: pacman
+  become: true
+
+- name: Install compose
+  ansible.builtin.package:
+    name: docker-compose
+    state: latest
+    use: pacman
+  become: true
