@@ -1,0 +1,8 @@
+---
+- name: Install nodejs latest LTS
+  ansible.builtin.shell:
+    cmd: /bin/bash -c "source {{ ansible_user_dir }}/.nvm/nvm.sh && nvm install --lts && nvm alias default stable"
+
+- name: Install pnpm
+  ansible.builtin.shell:
+    cmd: corepack prepare pnpm@latest --activate
