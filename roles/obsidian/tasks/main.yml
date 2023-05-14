@@ -1,0 +1,7 @@
+---
+- name: Install obsidian
+  ansible.builtin.package:
+    name: obsidian
+    state: latest
+    use: pacman
+  become: true
