@@ -1,0 +1,7 @@
+---
+- name: Install github cli
+  ansible.builtin.package:
+    name: github-cli
+    state: latest
+    use: pacman
+  become: true

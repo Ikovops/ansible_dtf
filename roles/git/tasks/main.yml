@@ -1,0 +1,7 @@
+---
+- name: Install git
+  ansible.builtin.package:
+    name: git
+    state: latest
+    use: pacman
+  become: true
