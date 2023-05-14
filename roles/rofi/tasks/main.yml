@@ -1,0 +1,7 @@
+---
+- name: Install rofi
+  ansible.builtin.package:
+    name: rofi
+    state: latest
+    use: pacman
+  become: true
