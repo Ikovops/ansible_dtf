@@ -1,0 +1,17 @@
+---
+- name: Checking previous version
+  ansible.builtin.stat:
+    path: /usr/local/bin/doppler
+  register: previous
+
+- name: Install doppler
+  ansible.builtin.shell:
+    cmd: curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sudo sh
+  become: true
+  when: not previous.stat.exists
+
+- name: Update doppler
+  ansible.builtin.shell:
+    cmd: doppler update
+  become: true
+  when: previous.stat.exists
