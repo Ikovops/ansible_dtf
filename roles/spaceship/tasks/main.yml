@@ -1,0 +1,7 @@
+---
+- name: Install spaceship
+  ansible.builtin.git:
+    clone: true
+    depth: 1
+    repo: https://github.com/spaceship-prompt/spaceship-prompt
+    dest: "{{ online_repos_dest }}/spaceship-prompt"
