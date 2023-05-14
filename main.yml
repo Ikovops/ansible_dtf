@@ -1,0 +1,15 @@
+---
+- name: Automated dotfiles deployment
+  hosts: localhost
+  vars_files:
+    - values.yml
+
+  tasks:
+    - name: Set roles
+      ansible.builtin.set_fact:
+        roles: "{{ app_roles }}"
+
+    - name: Run roles
+      ansible.builtin.include_role:
+        name: "{{ item }}"
+      loop: "{{ roles }}"

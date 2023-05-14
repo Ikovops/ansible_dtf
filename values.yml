@@ -1,0 +1,13 @@
+online_repos_dest: "{{ ansible_user_dir }}/Development/github.com"
+
+envvars_public:
+  TERM: "kitty"
+  TERMINAL: "xterm256-color"
+  EDITOR: "nvim"
+  NNN_FIFO: "/tmp/nnn.fifo"
+  NNN_PLUG: "p:preview-tui;r:renamer;w:wallpaper;j:autojump;"
+  NNN_TMPFILE: "/tmp/.lastd"
+  NVM_DIR: "$HOME/.nvm"
+  SAM_CLI_TELEMETRY: "0"
+  PNPM_HOME: "$HOME/.local/share/pnpm"
+  PATH: "$PATH:$PNPM_HOME:$HOME/go/bin:$HOME/.local/bin"

@@ -1,0 +1,45 @@
+#!/bin/env zsh
+set -e
+
+SSH_DIR="$HOME/.ssh"
+DOTFILES_DIR="$HOME/Lab/dotfiles"
+
+echo "Updating the packages database..."
+sudo pacman -Syy
+echo "Package database updated."
+
+echo "Searching for ansible package..."
+[[ ! -x $(command -v ansible) ]] && \
+	echo "Ansible not found, installing..." \
+	sudo pacman -S ansible --noconfirm \
+	echo "Ansible installed." || echo "Ansible found."
+
+echo "Checking for ansible SSH key..."
+[[ ! -f "$SSH_DIR/dtf_ansible" ]] && \
+	echo "SSH key for ansible not found, generating new key..." \
+	ssh-keygen -t rsa -b 4096 -C "$USER@$HOST" -f "$SSH_DIR/dtf_ansible" -P '' \
+	chmod 600 "$SSH_DIR/dtf_ansible" \
+	cat "$SSH_DIR/dtf_ansible.pub" >> "$SSH_DIR/authorized_keys" \
+	echo "Ssh key added." || echo "SSH key found."
+
+echo "Checking for dependencies..."
+[[ -e "$DOTFILES_DIR/requirements.yml" ]] && \
+	echo "Installing dependencies..."
+	ansible-galaxy install -r "$DOTFILES_DIR/requirements.yml"
+	echo "Dependencies installed." || echo "There's no dependencies to install."
+
+run_without_vault() {
+	echo "Running playbook..."
+	ansible-playbook $DOTFILES_DIR/main.yml "$@"
+}
+
+run_with_vault() {
+	echo "Running playbook with vault..."
+	ansible-playbook $DOTFILES_DIR/main.yml --vault-password-file "$DOTFILES_DIR/vault_pass.txt" "$@"
+}
+
+[[ -e "$DOTFILES_DIR/vault_pass.txt" ]] && run_with_vault
+[[ ! -e "$DOTFILES_DIR/vault_pass.txt" ]] && run_without_vault
+echo "Playbook run done."
+
+#vimfmt=bash
