@@ -1,6 +1,0 @@
----
-- name: Install go
-  kewlfft.aur.aur:
-    name: go
-    state: latest
-    use: paru
