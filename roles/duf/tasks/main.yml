@@ -1,0 +1,7 @@
+---
+- name: Install duf
+  ansible.builtin.package:
+    name: duf
+    state: latest
+    use: pacman
+  become: true
