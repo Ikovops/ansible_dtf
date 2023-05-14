@@ -1,0 +1,6 @@
+---
+- name: Install spotify
+  kewlfft.aur.aur:
+    name: spotify
+    state: latest
+    use: paru
