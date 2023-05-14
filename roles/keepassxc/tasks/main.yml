@@ -1,0 +1,7 @@
+---
+- name: Install keepassxc
+  ansible.builtin.package:
+    name: keepassxc
+    state: latest
+    use: pacman
+  become: true
