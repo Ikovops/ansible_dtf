@@ -1,0 +1,52 @@
+---
+- name: Verify JetBrainsMono previous install
+  ansible.builtin.stat:
+    path: /usr/local/share/fonts/JetBrainsMono/JetBrainsMono.zip
+  register: jbm
+
+- name: Verify Lilex previous install
+  ansible.builtin.stat:
+    path: /usr/local/share/fonts/Lilex/Lilex.zip
+  register: lilex
+
+- name: Create JBM folder
+  ansible.builtin.file:
+    path: /usr/local/share/fonts/JetBrainsMono
+    state: directory
+  become: true
+  when: not jbm.stat.exists
+
+- name: Create Lilex folder
+  ansible.builtin.file:
+    path: /usr/local/share/fonts/Lilex
+    state: directory
+  become: true
+  when: not lilex.stat.exists
+
+- name: Download JetBrainsMono NF
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/JetBrainsMono.zip
+    dest: /usr/local/share/fonts/JetBrainsMono/JetBrainsMono.zip
+  become: true
+  when: not jbm.stat.exists
+
+- name: Unzip font folder
+  ansible.builtin.shell:
+    chdir: /usr/local/share/fonts/JetBrainsMono
+    cmd: unzip JetBrainsMono.zip
+  become: true
+  when: not jbm.stat.exists
+
+- name: Install Lilex NF
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Lilex.zip
+    dest: /usr/local/share/fonts/Lilex/Lilex.zip
+  become: true
+  when: not lilex.stat.exists
+
+- name: Unzip font folder
+  ansible.builtin.shell:
+    chdir: /usr/local/share/fonts/Lilex
+    cmd: unzip Lilex.zip
+  become: true
+  when: not lilex.stat.exists
