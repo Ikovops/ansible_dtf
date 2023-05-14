@@ -1,0 +1,7 @@
+---
+- name: Install nextcloud
+  ansible.builtin.package:
+    name: nextcloud
+    state: latest
+    use: pacman
+  become: true
