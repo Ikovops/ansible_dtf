@@ -1,0 +1,6 @@
+---
+- name: Install insomnia
+  kewlfft.aur.aur:
+    name: insomnia
+    state: latest
+    use: paru
