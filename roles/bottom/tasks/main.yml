@@ -1,0 +1,7 @@
+---
+- name: Install bottom
+  ansible.builtin.package:
+    name: bottom
+    state: present
+    use: pacman
+  become: true
