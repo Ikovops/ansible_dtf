@@ -1,0 +1,7 @@
+---
+- name: Install wget
+  ansible.builtin.package:
+    name: wget
+    state: latest
+    use: pacman
+  become: true
