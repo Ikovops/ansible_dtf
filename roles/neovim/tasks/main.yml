@@ -1,0 +1,41 @@
+---
+- name: Clone neovim repo
+  ansible.builtin.git:
+    clone: true
+    depth: 1
+    repo: https://github.com/neovim/neovim
+    dest: "{{ online_repos_dest }}/neovim"
+  register: clone
+
+- name: Deps
+  community.general.make:
+    chdir: "{{ online_repos_dest }}/neovim"
+    target: deps
+  when: clone.changed
+
+- name: Build
+  community.general.make:
+    chdir: "{{ online_repos_dest }}/neovim"
+    params: CMAKE_BUILD_TYPE=RelWithDebInfo
+  when: clone.changed
+
+- name: Install
+  community.general.make:
+    chdir: "{{ online_repos_dest }}/neovim"
+    target: install
+  become: true
+  when: clone.changed
+
+- name: Clone Ikonera config
+  ansible.builtin.git:
+    clone: true
+    depth: 1
+    repo: https://github.com/ikonera/nvim-config
+    version: lazy
+    dest: "{{ online_repos_dest }}/nvim-config"
+
+- name: Link config to local
+  ansible.builtin.file:
+    src: "{{ online_repos_dest }}/nvim-config"
+    dest: "{{ ansible_user_dir }}/.config/nvim"
+    state: link
