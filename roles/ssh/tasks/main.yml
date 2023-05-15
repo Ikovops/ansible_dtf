@@ -1,0 +1,19 @@
+---
+- name: Install ssh
+  ansible.builtin.package:
+    name: openssh
+    state: latest
+    use: pacman
+  become: true
+
+- name: Set config
+  ansible.builtin.template:
+    src: "config.j2"
+    dest: "{{ ansible_user_dir }}/.ssh/config"
+
+- name: Set keys
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.ssh/{{ item.name }}"
+    content: "{{ item.value }}"
+  loop: "{{ ssh_keys }}"
+  when: ssh_keys is defined

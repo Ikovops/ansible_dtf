@@ -1,0 +1,8 @@
+{% if ssh_config is defined %}
+{% for key, value in ssh_config.items() %}
+Host {{ key }}
+{% for k, v in value.items() %}
+	{{ k }} {{ v }}
+{% endfor %}
+{% endfor %}
+{% endif %}

@@ -4,6 +4,7 @@ app_roles:
   - curl
   - wget
   - zip
+  - ssh
   - rofi
   - kitty
   - nnn
