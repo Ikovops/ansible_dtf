@@ -7,6 +7,7 @@ app_roles:
   - ssh
   - rofi
   - kitty
+  - i3
   - nnn
   - bottom
   - duf
