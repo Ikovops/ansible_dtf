@@ -1,0 +1,76 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = true
+
+format = '$all'
+
+right_format = '$git_branch$git_status$time$package'
+
+palette = "tkn"
+
+[palettes.tkn]
+red = "#f7768e"
+orange = "#ff9e64"
+green = "#9ece6a"
+lightgreen = "#73daca"
+whitesmoke = "#b4f9f8"
+blue = "#2ac3de"
+lightblue = "#7dcfff"
+dark_blue = "#7aa2f7"
+pink = "#bb9af7"
+grey_1 = "#c0caf5"
+grey_2 = "#a9b1d6"
+grey_3 = "#9aa5ce"
+taupe = "#cfc9c2"
+dark_1 = "#565f89"
+dark_2 = "#414868"
+dark_3 = "#24283b"
+black = "#1a1b26"
+
+[character]
+format = ' $symbol '
+success_symbol = '[](green)'
+error_symbol = '[](red)'
+
+[username]
+format = '\[[$user]($style)\]'
+style_user = 'dark_blue'
+style_root = 'bold red'
+show_always = true
+
+[directory]
+format = '\[[$path]($style)\] '
+style = 'lightblue'
+truncation_symbol = ' /'
+
+[git_branch]
+format = '\[[$symbol$branch(:$remote_branch)]($style)\]'
+style = 'italic red'
+symbol = ' '
+
+[git_status]
+format = '\[[$all_status$ahead_behind]($style)\]'
+style = 'orange'
+
+[nodejs]
+format = '\[[$symbol$version]($style)\]'
+style = 'lightgreen'
+
+[docker_context]
+format = '\[[$symbol$context]($style)\]'
+style = 'lightblue'
+
+[cmd_duration]
+format = '\[[ $duration]($style)\]'
+style = 'pink'
+
+[jobs]
+format = '[$number$symbol]($style)'
+style = 'pink'
+symbol = '  '
+
+[aws]
+format = '\[[$symbol$profile]($style)\]'
+style = 'orange'
+symbol = '  '
+
