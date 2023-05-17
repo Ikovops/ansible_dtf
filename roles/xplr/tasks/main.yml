@@ -1,0 +1,7 @@
+---
+- name: Install xplr
+  ansible.builtin.package:
+    name: xplr
+    state: latest
+    use: pacman
+  become: true

@@ -1,0 +1,12 @@
+---
+- name: Install starship
+  ansible.builtin.package:
+    name: starship
+    state: latest
+    use: pacman
+  become: true
+
+- name: Copy config
+  ansible.builtin.copy:
+    src: "config.toml"
+    dest: "{{ ansible_user_dir }}/.config/starship/config.toml"

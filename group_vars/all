@@ -8,7 +8,7 @@ app_roles:
   - rofi
   - kitty
   - i3
-  - nnn
+  - xplr
   - bottom
   - duf
   - ripgrep
@@ -34,4 +34,4 @@ app_roles:
   - keepassxc
   - nerd-fonts
   - zsh
-  - spaceship
+  - starship
