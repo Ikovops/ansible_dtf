@@ -1,0 +1,14 @@
+---
+- name: Install make
+  ansible.builtin.package:
+    name: make
+    state: latest
+    use: pacman
+  become: true
+
+- name: Install cmake
+  ansible.builtin.package:
+    name: cmake
+    state: latest
+    use: pacman
+  become: true

@@ -5,6 +5,7 @@ app_roles:
   - wget
   - zip
   - ssh
+  - make
   - rofi
   - kitty
   - i3
