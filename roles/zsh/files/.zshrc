@@ -10,17 +10,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-ZSH_PLUGS="${HOME}/.zsh/plugins"
-ZSH_THEMES="${HOME}/.zsh/themes"
-
 # -------------------------------- #
 #        THEMES & PLUGINS          #
 # -------------------------------- #
-
-source ${ZSH_THEMES}/spaceship/spaceship.zsh-theme
-source ${HOME}/.config/spaceship/spaceship.zsh
-
-source ${ZSH_PLUGS}/tmux.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # -------------------------------- #
 #           OTHER STUFF            #
@@ -38,3 +32,5 @@ source <(helm completion zsh)
 # nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(starship init zsh)"
