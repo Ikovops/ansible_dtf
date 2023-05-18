@@ -67,7 +67,7 @@ alias cp="rsync -Aaxvt"
 #          Nnn           #
 #                        #
 ##########################
-alias ls="nnn -de"
+alias ls="xplr"
 
 ##########################
 #                        #
@@ -84,7 +84,8 @@ alias dr="doppler run --"
 alias zshs="source $HOME/.zshrc"
 alias zshc="nvim $HOME/.zshrc"
 alias zshca="nvim $HOME/.zsh/aliases.zsh"
-alias zshce="nvim $HOME/.zsh/envvars.zsh"
+alias zshce="nvim $HOME/.zsh/envvars_public.zsh"
+alias zshcep="nvim $HOME/.zsh/envvars_private.zsh"
 
 ##########################
 #                        #
