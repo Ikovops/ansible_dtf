@@ -1,32 +1,41 @@
-#!/bin/env zsh
+#!/bin/env bash
 set -e
 
 SSH_DIR="$HOME/.ssh"
-DOTFILES_DIR="$HOME/Lab/dotfiles"
+DOTFILES_DIR="$HOME/Development/github.com/ansible_dtf"
 
 echo "Updating the packages database..."
 sudo pacman -Syy
 echo "Package database updated."
 
 echo "Searching for ansible package..."
-[[ ! -x $(command -v ansible) ]] && \
-	echo "Ansible not found, installing..." \
-	sudo pacman -S ansible --noconfirm \
-	echo "Ansible installed." || echo "Ansible found."
+if [[ ! -x $(command -v ansible) ]]; then
+	echo "Ansible not found, installing..."
+	sudo pacman -S ansible --noconfirm
+	echo "Ansible installed."
+else
+	echo "Ansible found."
+fi
 
 echo "Checking for ansible SSH key..."
-[[ ! -f "$SSH_DIR/dtf_ansible" ]] && \
-	echo "SSH key for ansible not found, generating new key..." \
-	ssh-keygen -t rsa -b 4096 -C "$USER@$HOST" -f "$SSH_DIR/dtf_ansible" -P '' \
-	chmod 600 "$SSH_DIR/dtf_ansible" \
-	cat "$SSH_DIR/dtf_ansible.pub" >> "$SSH_DIR/authorized_keys" \
-	echo "Ssh key added." || echo "SSH key found."
+if [[ ! -e "$SSH_DIR/dtf_ansible" ]]; then
+	echo "SSH key for ansible not found, generating new key..."
+	ssh-keygen -t rsa -b 4096 -C "$USER@$HOST" -f "$SSH_DIR/dtf_ansible" -P ''
+	chmod 600 "$SSH_DIR/dtf_ansible"
+	cat "$SSH_DIR/dtf_ansible.pub" >> "$SSH_DIR/authorized_keys"
+	echo "Ssh key added."
+else
+	echo "SSH key found."
+fi
 
 echo "Checking for dependencies..."
-[[ -e "$DOTFILES_DIR/requirements.yml" ]] && \
+if [[ -e "$DOTFILES_DIR/requirements.yml" ]]; then
 	echo "Installing dependencies..."
 	ansible-galaxy install -r "$DOTFILES_DIR/requirements.yml"
-	echo "Dependencies installed." || echo "There's no dependencies to install."
+	echo "Dependencies installed."
+else
+	echo "There's no dependencies to install."
+fi
 
 run_without_vault() {
 	echo "Running playbook..."
