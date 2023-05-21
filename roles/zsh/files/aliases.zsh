@@ -4,6 +4,7 @@
 #                        #
 ##########################
 alias g="git"
+alias gcl="git clone"
 alias gb="git branch"
 alias gp="git push"
 alias gpu="git push -u"
