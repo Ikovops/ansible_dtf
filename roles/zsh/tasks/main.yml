@@ -19,6 +19,13 @@
     use: pacman
   become: true
 
+- name: Install syntax highlighting
+  ansible.builtin.package:
+    name: zsh-syntax-highlighting
+    state: latest
+    use: pacman
+  become: true
+
 - name: Install completions
   ansible.builtin.package:
     name: zsh-completions
