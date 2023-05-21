@@ -22,8 +22,8 @@ app_roles:
   - aws-cli
   - aws-sam
   - doppler
-  - nvm
   - nodejs
+  - nvm
   - kubectl
   - helm
   - nextcloud
