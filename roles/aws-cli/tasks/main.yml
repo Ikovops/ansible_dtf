@@ -4,6 +4,11 @@
     path: /usr/local/aws-cli/v2
   register: previous
 
+- name: Create folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.aws"
+    state: directory
+
 - name: Download aws-cli v2
   ansible.builtin.shell:
     cmd: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "{{ ansible_user_dir }}/Downloads/awscliv2.zip"

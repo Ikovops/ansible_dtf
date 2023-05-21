@@ -6,6 +6,11 @@
     use: pacman
   become: true
 
+- name: Create folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/starship"
+    state: directory
+
 - name: Copy config
   ansible.builtin.copy:
     src: "config.toml"

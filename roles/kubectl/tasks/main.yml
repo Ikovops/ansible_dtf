@@ -6,6 +6,11 @@
     use: pacman
   become: true
 
+- name: Create folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.kube"
+    state: directory
+
 - name: Set kubeconfig
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.kube/config"
