@@ -2,3 +2,10 @@
 - name: Install kitty
   ansible.builtin.shell:
     cmd: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+- name: Copy kitty bin
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/.local/kitty.app/bin/kitty"
+    dest: /usr/bin/
+    state: link
+  become: true
