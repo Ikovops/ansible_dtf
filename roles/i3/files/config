@@ -43,7 +43,7 @@ bindsym $mod+Shift+d exec "pkill Discord"
 
 # start rofi (a program launcher)
 # A more modern dmenu replacement is rofi:
-bindsym $mod+d exec rofi -modi drun -show drun
+bindsym $mod+d exec rofi -show drun
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -239,8 +239,8 @@ smart_gaps off
 
 exec nitrogen --restore
 # exec_always --no-startup-id clipcatd
-exec_always --no-startup-id "killall polybar -q; sh ~/.config/polybar/launch.sh &>/dev/null"
-exec xset r rate 250
+exec_always --no-startup-id "killall polybar -q; polybar -c ~/.config/polybar/config.ini &>/dev/null"
+exec_always xset r rate 250
 exec setxkbmap us
 exec kitty
 exec keepassxc
