@@ -17,8 +17,8 @@ alias gd="git diff"
 alias gco="git checkout"
 alias gbc="git checkout -b"
 alias gst="git status"
-alias gstg="git status --graph"
 alias glo="git log"
+alias glog="git log --graph"
 alias grs="git restore"
 alias gr="git remote"
 alias grv="git remote -v"
@@ -65,7 +65,7 @@ alias cp="rsync -Aaxvt"
 
 ##########################
 #                        #
-#          Nnn           #
+#          Xplr          #
 #                        #
 ##########################
 alias ls="xplr"
